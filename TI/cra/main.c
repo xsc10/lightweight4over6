@@ -75,7 +75,8 @@ int main(int argc, char **argv)
 			if(recvArpPkt->arppart.ar_op==htons(1))//recv a request arp package
 			{   
 				//printf("[4over6 CRA]:received an arp request package!\n");
-				if(inSameSubnet(recvArpPkt->arppart.ar_sip,recvArpPkt->arppart.ar_tip)==1)
+				if(inSameLogicSubnet(recvArpPkt->arppart.ar_sip,recvArpPkt->arppart.ar_tip)==1 
+					&& inSamePhysicalSubnet(recvArpPkt->arppart.ar_sip,recvArpPkt->arppart.ar_tip)!=1)
 				{
 					printf("[4over6 CRA]:send a proxy arp!");
 					sendProxyArp(recvArpPkt);    

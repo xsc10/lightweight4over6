@@ -222,7 +222,7 @@ void updateGateway(unsigned char *dhcphead)
 	}
 }
 
-int inSameSubnet(unsigned char *ip1, unsigned char *ip2)
+int inSameLogicSubnet(unsigned char *ip1, unsigned char *ip2)
 {
 	struct if_hostInfo *hostIP;
 	int i;
@@ -255,4 +255,14 @@ int inSameSubnet(unsigned char *ip1, unsigned char *ip2)
 	//printf("warning! Can't find the mask of IP1 or IP2!\n");
 	
 	return -1;
+}
+
+int inSamePhysicalSubnet(unsigned char *ip1, unsigned char *ip2)
+{
+	int index1=hostIP2index(ip1);
+	int index2=hostIP2index(ip2);
+
+	if(index1!=-1 && index2!= -1 && index1==index2)
+		return 1;
+	return 0;
 }
