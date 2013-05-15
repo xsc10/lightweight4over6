@@ -23,56 +23,56 @@
 #define BUFFLEN 1501
 
 struct udp6_psedoheader {
-    uint8_t srcaddr[16];
-    uint8_t dstaddr[16];
-    uint32_t length;
-    uint16_t zero1;
-    uint8_t zero2;
-    uint8_t next_header;
+   uint8_t srcaddr[16];
+   uint8_t dstaddr[16];
+   uint32_t length;
+   uint16_t zero1;
+   uint8_t zero2;
+   uint8_t next_header;
 };
 
 struct udp4_psedoheader {
-    uint32_t srcaddr;
-    uint32_t dstaddr;
-    uint8_t zero;
-    uint8_t protocol;
-    uint16_t length;
+   uint32_t srcaddr;
+   uint32_t dstaddr;
+   uint8_t zero;
+   uint8_t protocol;
+   uint16_t length;
 };
 
 struct interface {
-    unsigned int if_index;
-    char if_name[20];
-    uint8_t addr[ETH_ALEN];
-    struct interface *next;
+   unsigned int if_index;
+   char if_name[20];
+   uint8_t addr[ETH_ALEN];
+   struct interface *next;
 };
 
 struct if_gateway
 {
-  //unsigned int if_index;
-  char gateway_addr[4];
-  struct if_gateway *next;
+   //unsigned int if_index;
+   char gateway_addr[4];
+   struct if_gateway *next;
 };
 
 struct if_hostInfo
 {
-  unsigned int if_index;
-  unsigned char hostMAC_addr[ETH_ALEN];
-  unsigned char hostIP_addr[4];
-  unsigned char mask[4];
+   unsigned int if_index;
+   unsigned char hostMAC_addr[ETH_ALEN];
+   unsigned char hostIP_addr[4];
+   unsigned char mask[4];
 // unsigned int leaseTime;
-  struct if_hostInfo *next;
+   struct if_hostInfo *next;
 };
 
 
 struct myether_header
 {
- u_int8_t  ether_dhost[ETH_ALEN];      /* destination eth addr */
- u_int8_t  ether_shost[ETH_ALEN];      /* source ether addr    */
- u_int16_t ether_type;                 /* packet type ID field */
+   u_int8_t  ether_dhost[ETH_ALEN];      /* destination eth addr */
+   u_int8_t  ether_shost[ETH_ALEN];      /* source ether addr    */
+   u_int16_t ether_type;                 /* packet type ID field */
 };
 
 struct myarphdr
- {
+{
    unsigned short int ar_hrd;          /* Format of hardware address.  */
    unsigned short int ar_pro;          /* Format of protocol address.  */
    unsigned char ar_hln;               /* Length of hardware address.  */
@@ -82,17 +82,19 @@ struct myarphdr
    unsigned char ar_sip[4];          /* Sender IP address.  */
    unsigned char ar_tha[ETH_ALEN];   /* Target hardware address.  */
    unsigned char ar_tip[4];          /* Target IP address.  */
- };
+};
 
 struct arppkt
 {
-  struct myether_header etherpart;
-  struct myarphdr arppart;
+   struct myether_header etherpart;
+   struct myarphdr arppart;
 };
 
 
 //char TUNNEL_IFNAME[20];
 //char PHYSIC_IFNAME[20];
+int isLinkcra;
+
 char LCRA_IFNAME[20];
 struct interface *lcra_interface;
 struct if_gateway *gateways;
